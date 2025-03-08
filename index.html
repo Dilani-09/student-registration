@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>STUDENT DETAILS TASK</h2>
+    <div class="container">
+        <h3>STUDENT FORM</h3>
+        <table  class="form-table" >
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" id="name" placeholder="Name"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age:</label></td>
+                <td><input type="number" id="age" placeholder="Age"></td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <input type="radio" name="gender" value="Male" checked> Male
+                    <input type="radio" name="gender" value="Female"> Female
+                </td>
+            </tr>
+            <tr>
+                <td><label for="course">Course:</label></td>
+                <td>
+                    <select id="course">
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="Python">Python</option>
+                        <option value="Java">Java</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" id="email" placeholder="E-mail"></td>
+            </tr>
+            <tr>
+                <td colspan="2" ><button onclick="addStudent()" class="btn-save">Save</button></td>
+            </tr>
+        </table>
+        
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>AGE</th>
+                    <th>COURSE</th>
+                    <th>GENDER</th>
+                    <th>EMAIL</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody id="studentTable">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function addStudent() {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let course = document.getElementById("course").value;
+            let email = document.getElementById("email").value;
+            let gender = document.querySelector('input[name="gender"]:checked').value;
+            
+            if (!name || !age || !email) {
+                alert("Please fill all fields");
+                return;
+            }
+            
+            let table = document.getElementById("studentTable");
+            let row = table.insertRow();
+            row.innerHTML = `<td>${name}</td><td>${age}</td><td>${course}</td><td>${gender}</td><td>${email}</td><td><button class='delete-btn' onclick='deleteStudent(this)'>Delete</button></td>`;
+        }
+
+        function deleteStudent(btn) {
+            let row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
